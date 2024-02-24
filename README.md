@@ -1,126 +1,66 @@
 # flutter_custom_tab_bar_view
 //custom_tab_bar_view
-// this custom tap bar
-class StackOver extends StatefulWidget {
-  @override
-  _StackOverState createState() => _StackOverState();
-}
 
-class _StackOverState extends State<StackOver>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
+class MainPage extends StatelessWidget {
+  const MainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Tab bar'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            _buildTabBar(),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  _buildTabBarView("Place Bid"),
-                  _buildTabBarView("Buy Now"),
-                ],
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        body: SafeArea(
+          child: Column(
+            children: [
+              SizedBox(
+                height: Dimensions.height20,
               ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTabBar() {
-    return Container(
-      width: 300,
-      height: 45,
-      decoration: BoxDecoration(
-        color: Colors.grey, // Set the green color here
-        borderRadius: BorderRadius.circular(25.0),
-      ),
-      child: TabBar(
-        dividerColor: Colors.white,
-        controller: _tabController,
-        tabAlignment: TabAlignment.fill,
-        indicator: BoxDecoration(
-          borderRadius: BorderRadius.circular(25.0),
-          color: Colors.yellow.withOpacity(0.5), // Adjust opacity if necessary
-        ),
-        indicatorSize:
-            TabBarIndicatorSize.tab, // this  set to fill container on tap
-        labelColor: Colors.white,
-        unselectedLabelColor: Colors.black,
-        tabs: [
-          Tab(
-            child: Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      // color: const Color.fromARGB(255, 2, 28, 2),
-                    ),
-                    child: const Center(child: Text("Place Bid")),
+              Container(
+                height: 40,
+                width: MediaQuery.of(context).size.width * 0.8,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30.0),
+                  color: Colors.amber,
+                ),
+                child: TabBar(
+                  dividerColor: Colors.transparent, // hide divider
+                  indicatorColor: Colors.amber,
+                  //indicatorSize this show tab fill when click
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  indicator: BoxDecoration(
+                    color: Colors.green[500],
+                    borderRadius: BorderRadius.circular(30.0),
                   ),
-                )
-              ],
-            ),
-          ),
-          Expanded(
-            child: Tab(
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        //color: Color.fromARGB(255, 20, 218, 20),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          "buy now",
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
-  Widget _buildTabBarView(String text) {
-    return Center(
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: 25,
-          fontWeight: FontWeight.w600,
+                  labelColor: Colors.black,
+                  unselectedLabelColor: Colors.blue,
+                  tabs: const [
+                    Tab(
+                      text: "Home",
+                    ),
+                    Tab(text: "Page 2"),
+                    Tab(text: "Page 3"),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    Container(
+                      width: double.maxFinite,
+                      height: double.maxFinite,
+                      color: Colors.grey,
+                      child: const Center(child: Text("page 1")),
+                    ),
+                    const Text("Page 2"),
+                    const Text("Page 3"),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-
