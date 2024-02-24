@@ -31,7 +31,6 @@ class MainPage extends StatelessWidget {
                     color: Colors.green[500],
                     borderRadius: BorderRadius.circular(30.0),
                   ),
-
                   labelColor: Colors.black,
                   unselectedLabelColor: Colors.blue,
                   tabs: const [
